@@ -7,28 +7,34 @@ interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
   role: string | null;
-  userId: number | null; 
+  userId: number | null;
+  fullname: string | null;
+  email: string | null;
   loading: boolean;
   error: string | null;
 }
 
 interface JwtPayload {
   roles: string[];
+  fullname: string;
+  email: string
   id: number; 
 }
 
 const extractDataFromToken = (
   token: string | null
-): { role: string | null; userId: number | null } => {
-  if (!token) return { role: null, userId: null };
+): { role: string | null; userId: number | null; fullname: string | null; email: string | null } => {
+  if (!token) return { role: null, userId: null, fullname: null, email: null };
   try {
     const decoded: JwtPayload = jwtDecode(token);
     return {
       role: decoded.roles.includes("ROLE_ADMIN") ? "admin" : "user",
-      userId: decoded.id, 
+      userId: decoded.id,
+      fullname: decoded.fullname,
+      email: decoded.email,
     };
   } catch {
-    return { role: null, userId: null };
+    return { role: null, userId: null, fullname: null, email: null };
   }
 };
 
@@ -36,7 +42,9 @@ const initialState: AuthState = {
   token: localStorage.getItem("token") || null,
   isAuthenticated: !!localStorage.getItem("token"),
   role: extractDataFromToken(localStorage.getItem("token")).role,
-  userId: extractDataFromToken(localStorage.getItem("token")).userId, 
+  userId: extractDataFromToken(localStorage.getItem("token")).userId,
+  fullname: extractDataFromToken(localStorage.getItem("token")).fullname,
+  email: extractDataFromToken(localStorage.getItem("token")).email,
   loading: false,
   error: null,
 };

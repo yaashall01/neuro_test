@@ -6,7 +6,7 @@ const AdminDashboard = () => {
     <div className="flex min-h-screen bg-gray-100 ">
       <AdminSidebar />
 
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-6 ml-72">
         <Outlet /> 
       </main>
     </div>

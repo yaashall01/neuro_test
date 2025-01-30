@@ -37,7 +37,7 @@ const ProductManagement = () => {
       {loading && <p className="text-center text-indigo-500">Loading products...</p>}
       {error && <p className="text-red-500 text-center">{error}</p>}
 
-      <div className="overflow-y-auto max-h-[460px] rounded-lg shadow-lg mt-4">
+      <div className="overflow-y-auto max-h-[360px] rounded-lg shadow-lg mt-4">
         <table className="w-full bg-white border-collapse">
           <thead>
             <tr className="bg-indigo-600 text-white text-left">

@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../redux/store";
 import { logoutUser } from "../redux/slices/authSlice";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -8,8 +8,7 @@ const AdminSidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const adminEmail = "admin@example.com";
-  const adminName = "Admin User";
+  const { fullname, email } = useSelector((state: RootState) => state.auth);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -17,15 +16,16 @@ const AdminSidebar = () => {
   };
 
   return (
-    <aside className="w-72 h-screen bg-white shadow-lg rounded-r-3xl flex flex-col">
+    <aside className="w-72 h-screen bg-white shadow-lg rounded-r-3xl flex flex-col fixed left-0 top-0">
       <div className="p-6 border-b flex flex-col items-center">
         <img src="/src/assets/logo.png" alt="Neurobase Logo" className="h-12" />
         <h1 className="text-xl font-bold mt-2 text-indigo-600">Neurobase Admin</h1>
       </div>
 
+      {/* Render authenticated user's name and email */}
       <div className="p-6 border-b text-center">
-        <h2 className="text-lg font-semibold">{adminName}</h2>
-        <p className="text-gray-500 text-sm">{adminEmail}</p>
+        <h2 className="text-lg font-semibold">{fullname || "Admin User"}</h2>
+        <p className="text-gray-500 text-sm">{email || "admin@example.com"}</p>
       </div>
 
       <nav className="flex-1 p-4">
