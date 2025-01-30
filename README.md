@@ -67,7 +67,7 @@ L'admin peut gérer les produits et les utilisateurs, tandis que l'utilisateur p
 1. Assurez-vous d’avoir **PHP**, **Composer**, et **Symfony CLI**.  
 2. Clonez le projet et accédez au dossier backend :  
    ```sh
-   git clone https://github.com/ton-repo.git
+   git clone https://github.com/yaashall01/neuro_test
    cd api
    ```
 3. Installez les dépendances :  
